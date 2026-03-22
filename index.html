@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <title>VinylKeeper 🎵</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🎵 VinylKeeper</h1>
+    <p class="tagline">Scanne. Estime. Vends.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="search">🔍 Recherche</button>
+    <button class="tab" data-tab="result">💿 Résultat</button>
+    <button class="tab" data-tab="announce">📋 Annonce</button>
+    <button class="tab" data-tab="settings">⚙️ Réglages</button>
+  </nav>
+
+  <!-- TAB: Recherche -->
+  <section id="tab-search" class="tab-content active">
+    <div class="search-modes">
+      <button class="mode-btn active" data-mode="text">Texte</button>
+      <button class="mode-btn" data-mode="barcode">Code-barres</button>
+      <button class="mode-btn" data-mode="matrix">Matrice</button>
+    </div>
+
+    <div id="mode-text" class="mode-input">
+      <input type="text" id="search-text" placeholder="Artiste, album..." />
+    </div>
+    <div id="mode-barcode" class="mode-input hidden">
+      <input type="text" id="search-barcode" placeholder="Code-barres (ex: 5099750442227)" />
+    </div>
+    <div id="mode-matrix" class="mode-input hidden">
+      <input type="text" id="search-matrix" placeholder="Numéro de matrice (ex: BEA-6303-A)" />
+    </div>
+
+    <button id="btn-search" class="btn-primary">Rechercher</button>
+
+    <div id="search-results" class="results-list hidden"></div>
+  </section>
+
+  <!-- TAB: Résultat -->
+  <section id="tab-result" class="tab-content hidden">
+    <div id="result-card" class="result-card">
+      <p class="placeholder">Sélectionne un disque dans la recherche.</p>
+    </div>
+
+    <div id="pricing-block" class="pricing-block hidden">
+      <h3>Estimation</h3>
+      <div class="form-row">
+        <label for="buy-price">Prix d'achat (€)</label>
+        <input type="number" id="buy-price" placeholder="0.00" min="0" step="0.50" />
+      </div>
+      <div class="form-row">
+        <label for="condition">État</label>
+        <select id="condition">
+          <option value="1.0">Mint (M)</option>
+          <option value="0.9" selected>Near Mint (NM)</option>
+          <option value="0.75">Very Good+ (VG+)</option>
+          <option value="0.5">Very Good (VG)</option>
+          <option value="0.3">Good+ (G+)</option>
+          <option value="0.2">Good (G)</option>
+        </select>
+      </div>
+      <div class="price-summary" id="price-summary"></div>
+      <button id="btn-generate" class="btn-primary">Générer l'annonce →</button>
+    </div>
+  </section>
+
+  <!-- TAB: Annonce -->
+  <section id="tab-announce" class="tab-content hidden">
+    <div class="announce-header">
+      <h3>Annonce Vinted</h3>
+      <button id="btn-copy" class="btn-copy">📋 Copier</button>
+    </div>
+    <textarea id="announce-text" rows="16" placeholder="L'annonce apparaîtra ici après avoir sélectionné un disque."></textarea>
+    <div id="copy-confirm" class="copy-confirm hidden">✓ Copié dans le presse-papier !</div>
+  </section>
+
+  <!-- TAB: Réglages -->
+  <section id="tab-settings" class="tab-content hidden">
+    <div class="settings-form">
+      <div class="form-row">
+        <label for="discogs-token">Token Discogs</label>
+        <input type="password" id="discogs-token" placeholder="Votre personal access token" />
+        <small>Paramètres → Développeurs → Generate new token</small>
+      </div>
+      <div class="form-row">
+        <label for="margin-target">Marge cible (×)</label>
+        <input type="number" id="margin-target" value="1.5" min="1" max="5" step="0.1" />
+        <small>Ex: 1.5 = vendre 50% de plus que le prix d'achat</small>
+      </div>
+      <button id="btn-save-settings" class="btn-primary">Sauvegarder</button>
+      <div id="settings-confirm" class="copy-confirm hidden">✓ Réglages sauvegardés !</div>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
